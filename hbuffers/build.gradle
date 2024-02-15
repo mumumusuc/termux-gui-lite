@@ -5,6 +5,7 @@ plugins {
 
 android {
     compileSdk 31
+    ndkVersion '26.1.10909125'
 
     defaultConfig {
         // this is set to 24 so gradle doesn't complain when merging the manifest. The library is for API 26, and the Kotlin part is responsible the functions are never called on a lower api level
@@ -17,6 +18,7 @@ android {
             cmake {
                 // force the api version for the native library to be 26
                 arguments "-DANDROID_PLATFORM=26"
+                abiFilters "arm64-v8a"
             }
         }
     }
@@ -41,7 +43,6 @@ android {
     externalNativeBuild {
         cmake {
             path "src/main/cpp/CMakeLists.txt"
-            version "3.10.2"
         }
     }
     compileOptions {
